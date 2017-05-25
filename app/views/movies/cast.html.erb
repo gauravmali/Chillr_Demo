@@ -1,0 +1,9 @@
+<!-- Casting view for the selected movie -->
+<h1>Selected movie's casting: -</h1>
+<% count = 0 %>
+<% @movie_casting_hash.each do |character_name, real_name| %>
+	<% count += 1 %>
+	<!-- the code below will give the complete list of the casting for that specific movie -->
+	<%= "#{count}." %><b><%= "#{character_name} ="%></b> <%= "#{real_name}" %><br>
+<%end%>
+<br><a href=/><button><b>Go Back!</b></button> <!-- press this button if you want to go back and search something else. -->

@@ -1,0 +1,22 @@
+<!-- Index view for searching the movie -->
+<!-- 1) The first block of code will fetch the movie name that user will enter and forward it to the controller as a parameter :search -->
+<%= form_tag({:controller=>"movies", :action=>"new"}, method: :get) do %> <!-- Calling movies controller and search method -->
+	<h1><label for="search">Search a movie you like !</label></h1> <!-- Heading-->
+	<%= text_field_tag :search %><br> <!-- Search Box -->
+	<br><%= submit_tag "Submit" %><br> <!--Submit Button -->
+<% end %> 
+<!-- 2) The next block of code will display first 20 search results from the API, Hopefully you will find your movie here :)-->
+<% if @searched_movies_hash != nil %>
+	<% count = 0 %>
+	<% if @searched_movies_hash.empty? %>
+		<b>"No Results Found. Please try something else."<b>
+	<% else %> 
+		<% @searched_movies_hash.each do |each_movie_key, each_movie_value| %>
+			<% count += 1 %>
+			<!--The whole list will have a link to the cast for that specific movie. We are using each_movie_key value which is an unique id for that movie and forwarding it with the link (when you click it ;) -->
+			<br><%= "#{count}." %> <%= link_to "#{each_movie_value}", controller: "movies", action: "cast", query: "#{each_movie_key}" %><br>
+		<% end %>
+	<% end %>
+<% else %>
+	<br><em> *List is currently empty. Please type something in the search box above*</em>
+<% end %>
